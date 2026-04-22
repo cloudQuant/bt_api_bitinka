@@ -45,7 +45,7 @@ class BitinkaErrorTranslator(ErrorTranslator):
 
     @staticmethod
     def _build_error(
-        *, code: UnifiedErrorCode, venue: str, raw_error: dict[str, Any]
+        *, code: UnifiedErrorCode, venue: str, raw_error: dict[str, Any],
     ) -> UnifiedError:
         message = str(raw_error.get("message", raw_error.get("msg", code.name)))
         return UnifiedError(
