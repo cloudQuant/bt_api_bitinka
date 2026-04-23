@@ -37,7 +37,10 @@ class BitinkaRequestDataSpot(BitinkaRequestData):
         return symbol
 
     def _get_tick(
-        self, symbol: str, extra_data: RequestExtraData | None = None, **kwargs: Any,
+        self,
+        symbol: str,
+        extra_data: RequestExtraData | None = None,
+        **kwargs: Any,
     ) -> RequestSpec:
         request_type = "get_tick"
         path = "GET /ticker"
@@ -64,13 +67,19 @@ class BitinkaRequestDataSpot(BitinkaRequestData):
         return [ticker], ticker is not None
 
     def get_tick(
-        self, symbol: str, extra_data: RequestExtraData | None = None, **kwargs: Any,
+        self,
+        symbol: str,
+        extra_data: RequestExtraData | None = None,
+        **kwargs: Any,
     ) -> Any:
         path, params, extra_data = self._get_tick(symbol, extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
 
     def async_get_tick(
-        self, symbol: str, extra_data: RequestExtraData | None = None, **kwargs: Any,
+        self,
+        symbol: str,
+        extra_data: RequestExtraData | None = None,
+        **kwargs: Any,
     ) -> None:
         path, params, extra_data = self._get_tick(symbol, extra_data, **kwargs)
         self.submit(
@@ -133,7 +142,9 @@ class BitinkaRequestDataSpot(BitinkaRequestData):
         )
 
     def _get_exchange_info(
-        self, extra_data: RequestExtraData | None = None, **kwargs: Any,
+        self,
+        extra_data: RequestExtraData | None = None,
+        **kwargs: Any,
     ) -> RequestSpec:
         request_type = "get_exchange_info"
         path = "GET /markets"
@@ -191,7 +202,9 @@ class BitinkaRequestDataSpot(BitinkaRequestData):
         return path, params, extra_data
 
     def _get_account(
-        self, extra_data: RequestExtraData | None = None, **kwargs: Any,
+        self,
+        extra_data: RequestExtraData | None = None,
+        **kwargs: Any,
     ) -> RequestSpec:
         request_type = "get_account"
         path = "GET /account"
@@ -216,13 +229,19 @@ class BitinkaRequestDataSpot(BitinkaRequestData):
         return [account], account is not None
 
     def get_account(
-        self, symbol: str = "ALL", extra_data: RequestExtraData | None = None, **kwargs: Any,
+        self,
+        symbol: str = "ALL",
+        extra_data: RequestExtraData | None = None,
+        **kwargs: Any,
     ) -> Any:
         path, params, extra_data = self._get_account(extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
 
     def async_get_account(
-        self, symbol: str = "ALL", extra_data: RequestExtraData | None = None, **kwargs: Any,
+        self,
+        symbol: str = "ALL",
+        extra_data: RequestExtraData | None = None,
+        **kwargs: Any,
     ) -> None:
         path, params, extra_data = self._get_account(extra_data, **kwargs)
         self.submit(
@@ -231,7 +250,10 @@ class BitinkaRequestDataSpot(BitinkaRequestData):
         )
 
     def _get_balance(
-        self, symbol: str | None = None, extra_data: RequestExtraData | None = None, **kwargs: Any,
+        self,
+        symbol: str | None = None,
+        extra_data: RequestExtraData | None = None,
+        **kwargs: Any,
     ) -> RequestSpec:
         request_type = "get_balance"
         path = "GET /balance"
@@ -259,7 +281,10 @@ class BitinkaRequestDataSpot(BitinkaRequestData):
         return [balance], balance is not None
 
     def get_balance(
-        self, symbol: str | None = None, extra_data: RequestExtraData | None = None, **kwargs: Any,
+        self,
+        symbol: str | None = None,
+        extra_data: RequestExtraData | None = None,
+        **kwargs: Any,
     ) -> Any:
         path, params, extra_data = self._get_balance(symbol, extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
@@ -389,7 +414,10 @@ class BitinkaRequestDataSpot(BitinkaRequestData):
         return self.request(path, params=params, extra_data=extra_data)
 
     def _get_open_orders(
-        self, symbol: str | None = None, extra_data: RequestExtraData | None = None, **kwargs: Any,
+        self,
+        symbol: str | None = None,
+        extra_data: RequestExtraData | None = None,
+        **kwargs: Any,
     ) -> RequestSpec:
         path = "GET /openOrders"
         if extra_data is None:
@@ -409,7 +437,10 @@ class BitinkaRequestDataSpot(BitinkaRequestData):
         return path, params, extra_data
 
     def get_open_orders(
-        self, symbol: str | None = None, extra_data: RequestExtraData | None = None, **kwargs: Any,
+        self,
+        symbol: str | None = None,
+        extra_data: RequestExtraData | None = None,
+        **kwargs: Any,
     ) -> Any:
         path, params, extra_data = self._get_open_orders(symbol, extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
