@@ -8,6 +8,7 @@ from bt_api_base.feeds.capability import Capability
 from bt_api_base.feeds.feed import Feed
 from bt_api_base.feeds.http_client import HttpClient
 from bt_api_base.logging_factory import get_logger
+
 from bt_api_bitinka.exchange_data import BitinkaExchangeDataSpot
 
 RequestParams = dict[str, Any]
@@ -118,14 +119,18 @@ class BitinkaRequestData(Feed):
             self.async_logger.error(f"Async callback error: {e}")
 
     def _process_response(
-        self, response: dict[str, Any] | list[Any], extra_data: RequestExtraData | None = None
+        self,
+        response: dict[str, Any] | list[Any],
+        extra_data: RequestExtraData | None = None,
     ) -> RequestData:
         if extra_data is None:
             extra_data = {}
         return RequestData(response, extra_data)
 
     def _get_server_time(
-        self, extra_data: RequestExtraData | None = None, **kwargs: Any
+        self,
+        extra_data: RequestExtraData | None = None,
+        **kwargs: Any,
     ) -> RequestSpec:
         if extra_data is None:
             extra_data = {}
@@ -135,12 +140,14 @@ class BitinkaRequestData(Feed):
                 "symbol_name": "",
                 "asset_type": self.asset_type,
                 "request_type": "get_server_time",
-            }
+            },
         )
         return "GET /serverTime", {}, extra_data
 
     def get_server_time(
-        self, extra_data: RequestExtraData | None = None, **kwargs: Any
+        self,
+        extra_data: RequestExtraData | None = None,
+        **kwargs: Any,
     ) -> RequestData:
         """get_server_time method"""
         path, params, extra_data = self._get_server_time(extra_data, **kwargs)
