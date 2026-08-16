@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 from typing import Any
@@ -10,6 +11,7 @@ from bt_api_bitinka.registry_registration import register_bitinka
 
 
 def get_plugin_info() -> PluginInfo:
+    """get_plugin_info function"""
     return PluginInfo(
         name="bt_api_bitinka",
         version=__version__,
@@ -21,5 +23,6 @@ def get_plugin_info() -> PluginInfo:
 
 
 def register_plugin(registry: ExchangeRegistry, runtime_factory: Any) -> PluginInfo:
+    """register_plugin function"""
     register_bitinka(registry)
     return get_plugin_info()

@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 import json
@@ -9,12 +10,14 @@ from bt_api_base.functions.utils import from_dict_get_float, from_dict_get_strin
 
 
 class BitinkaBalanceData(BalanceData):
+    """Class BitinkaBalanceData"""
     def __init__(
         self,
         balance_info: Any,
         asset_type: str = "SPOT",
         has_been_json_encoded: bool = False,
     ) -> None:
+        """__init__ method"""
         super().__init__(balance_info, has_been_json_encoded)
         self.exchange_name = "BITINKA"
         self.asset_type = asset_type
@@ -25,6 +28,7 @@ class BitinkaBalanceData(BalanceData):
         self.local_update_time = time.time()
 
     def init_data(self) -> BitinkaBalanceData:
+        """init_data method"""
         if not self.has_been_json_encoded:
             self.balance_data = (
                 json.loads(self.balance_info)
@@ -43,6 +47,7 @@ class BitinkaBalanceData(BalanceData):
         return self
 
     def get_all_data(self) -> dict[str, Any]:
+        """get_all_data method"""
         self.init_data()
         return {
             "exchange_name": self.exchange_name,
@@ -55,53 +60,69 @@ class BitinkaBalanceData(BalanceData):
         }
 
     def get_exchange_name(self) -> str:
+        """get_exchange_name method"""
         return self.exchange_name
 
     def get_asset_type(self) -> str | None:
+        """get_asset_type method"""
         return self.asset_type
 
     def get_server_time(self) -> float | None:
+        """get_server_time method"""
         return None
 
     def get_local_update_time(self) -> float | None:
+        """get_local_update_time method"""
         return float(self.local_update_time)
 
     def get_account_id(self) -> str | None:
+        """get_account_id method"""
         return None
 
     def get_account_type(self) -> str | None:
+        """get_account_type method"""
         return None
 
     def get_fee_tier(self) -> int | str | None:
+        """get_fee_tier method"""
         return None
 
     def get_max_withdraw_amount(self) -> float | None:
+        """get_max_withdraw_amount method"""
         return None
 
     def get_margin(self) -> float | None:
+        """get_margin method"""
         return None
 
     def get_used_margin(self) -> float | None:
+        """get_used_margin method"""
         return None
 
     def get_available_margin(self) -> float | None:
+        """get_available_margin method"""
         return self.available
 
     def get_cash(self) -> float | None:
+        """get_cash method"""
         return self.available
 
     def get_total(self) -> float:
+        """get_total method"""
         return float((self.available or 0.0) + (self.locked or 0.0))
 
     def get_currency(self) -> str | None:
+        """get_currency method"""
         self.init_data()
         return self.currency
 
     def get_available(self) -> float | None:
+        """get_available method"""
         self.init_data()
         return self.available
 
     def get_locked(self) -> float | None:
+        """get_locked method"""
         self.init_data()
         return self.locked
 
@@ -113,10 +134,12 @@ class BitinkaBalanceData(BalanceData):
 
 
 class BitinkaRequestBalanceData(BitinkaBalanceData):
+    """Class BitinkaRequestBalanceData"""
     pass
 
 
 class BitinkaWssBalanceData(BitinkaBalanceData):
+    """Class BitinkaWssBalanceData"""
     pass
 
 

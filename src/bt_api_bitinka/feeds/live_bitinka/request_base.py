@@ -1,3 +1,4 @@
+"""Module documentation"""
 from __future__ import annotations
 
 from typing import Any, Optional
@@ -15,6 +16,7 @@ RequestSpec = tuple[str, Optional[RequestParams], RequestExtraData]
 
 
 class BitinkaRequestData(Feed):
+    """Class BitinkaRequestData"""
     @classmethod
     def _capabilities(cls) -> set[Capability]:
         return {
@@ -28,6 +30,7 @@ class BitinkaRequestData(Feed):
         }
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         super().__init__(data_queue, **kwargs)
         self.data_queue = data_queue
         self.exchange_name = kwargs.get("exchange_name", "BITINKA___SPOT")
@@ -63,6 +66,7 @@ class BitinkaRequestData(Feed):
         extra_data: RequestExtraData | None = None,
         timeout: int = 10,
     ) -> RequestData:
+        """request method"""
         method = path.split()[0] if " " in path else "GET"
         request_path = "/" + path.split()[1] if " " in path else path
         headers = self._get_headers(method, request_path, params, body)
@@ -87,6 +91,7 @@ class BitinkaRequestData(Feed):
         extra_data: RequestExtraData | None = None,
         timeout: int = 5,
     ) -> RequestData:
+        """async_request method"""
         method = path.split()[0] if " " in path else "GET"
         request_path = "/" + path.split()[1] if " " in path else path
         headers = self._get_headers(method, request_path, params, body)
@@ -104,6 +109,7 @@ class BitinkaRequestData(Feed):
             raise
 
     def async_callback(self, future: Any) -> None:
+        """async_callback method"""
         try:
             result = future.result()
             if result is not None:
@@ -136,18 +142,23 @@ class BitinkaRequestData(Feed):
     def get_server_time(
         self, extra_data: RequestExtraData | None = None, **kwargs: Any
     ) -> RequestData:
+        """get_server_time method"""
         path, params, extra_data = self._get_server_time(extra_data, **kwargs)
         return self.request(path, params=params, extra_data=extra_data)
 
     def push_data_to_queue(self, data: Any) -> None:
+        """push_data_to_queue method"""
         if self.data_queue is not None:
             self.data_queue.put(data)
 
     def connect(self) -> None:
+        """connect method"""
         pass
 
     def disconnect(self) -> None:
+        """disconnect method"""
         super().disconnect()
 
     def is_connected(self) -> bool:
+        """is_connected method"""
         return True

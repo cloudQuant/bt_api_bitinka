@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 from queue import Queue
@@ -9,6 +10,7 @@ from bt_api_bitinka.feeds.live_bitinka.spot import BitinkaRequestDataSpot
 
 
 def test_bitinka_headers_include_api_key() -> None:
+    """test_bitinka_headers_include_api_key function"""
     request_data = BitinkaRequestData(public_key="public-key")
 
     headers = request_data._get_headers("GET", "/ticker")
@@ -18,6 +20,7 @@ def test_bitinka_headers_include_api_key() -> None:
 
 
 def test_bitinka_convert_symbol_handles_dash_and_underscore() -> None:
+    """test_bitinka_convert_symbol_handles_dash_and_underscore function"""
     request_data = BitinkaRequestDataSpot()
 
     assert request_data._convert_symbol("BTC-USD") == "BTC/USD"
@@ -25,6 +28,7 @@ def test_bitinka_convert_symbol_handles_dash_and_underscore() -> None:
 
 
 def test_bitinka_get_deals_builds_market_and_limits() -> None:
+    """test_bitinka_get_deals_builds_market_and_limits function"""
     request_data = BitinkaRequestDataSpot()
 
     path, params, extra_data = request_data._get_deals(
@@ -37,11 +41,13 @@ def test_bitinka_get_deals_builds_market_and_limits() -> None:
 
 
 def test_bitinka_async_callback_pushes_result_to_queue() -> None:
+    """test_bitinka_async_callback_pushes_result_to_queue function"""
     queue: Queue[Any] = Queue()
     request_data = BitinkaRequestData(data_queue=queue)
 
     class _Future:
         def result(self) -> dict[str, Any]:
+            """result method"""
             return {"ok": True}
 
     request_data.async_callback(_Future())
@@ -50,6 +56,7 @@ def test_bitinka_async_callback_pushes_result_to_queue() -> None:
 
 
 def test_bitinka_disconnect_closes_http_client() -> None:
+    """test_bitinka_disconnect_closes_http_client function"""
     request_data = BitinkaRequestData(public_key="public-key", private_key="secret-key")
     request_data._http_client.close = MagicMock()
 
@@ -59,6 +66,7 @@ def test_bitinka_disconnect_closes_http_client() -> None:
 
 
 def test_bitinka_falls_back_to_api_credentials_when_aliases_are_empty() -> None:
+    """test_bitinka_falls_back_to_api_credentials_when_aliases_are_empty function"""
     request_data = BitinkaRequestData(
         public_key="",
         api_key="public-key",
